@@ -1,4 +1,4 @@
-import styles from "./page.module.css";
+import styles from './page.module.css'
 import FamilyList from '@/components/FamilyList'
 import { Suspense } from 'react'
 

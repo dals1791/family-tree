@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
+    "\n\tmutation CreateFamily($input: [FamilyCreateInput!]!) {\n    \tcreateFamilies(input: $input) {\n\t\t\tfamilies {\n\t\t\t\tid\n\t\t\t\tname\n\t\t\t\tmembers {\n\t\t\t\t\tid\n\t\t\t\t\tfirstName\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n": types.CreateFamilyDocument,
     "\n\tquery GetAllFamilies {\n\t\tfamilies {\n\t\t\tid\n\t\t\tname\n\t\t\tmembers {\n\t\t\t\tid\n\t\t\t\tfirstName\n\t\t\t\tlastName\n\t\t\t}\n\t\t}\n\t}\n": types.GetAllFamiliesDocument,
 };
 
@@ -31,6 +32,10 @@ const documents = {
  */
 export function gql(source: string): unknown;
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n\tmutation CreateFamily($input: [FamilyCreateInput!]!) {\n    \tcreateFamilies(input: $input) {\n\t\t\tfamilies {\n\t\t\t\tid\n\t\t\t\tname\n\t\t\t\tmembers {\n\t\t\t\t\tid\n\t\t\t\t\tfirstName\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation CreateFamily($input: [FamilyCreateInput!]!) {\n    \tcreateFamilies(input: $input) {\n\t\t\tfamilies {\n\t\t\t\tid\n\t\t\t\tname\n\t\t\t\tmembers {\n\t\t\t\t\tid\n\t\t\t\t\tfirstName\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
