@@ -1,0 +1,40 @@
+.formToggleContainer {
+	position: relative;
+	display: flex;
+	align-items: center;
+	border: 1px solid;
+}
+
+.toggleButton {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	gap: 1rem;
+	padding: 0.25rem;
+	padding-bottom: 0.5rem;
+	width: 100%;
+	height: 100%;
+	transition: background 0.4s ease-in-out;
+	border: none;
+
+	&.isSelected {
+		font-weight: bold;
+		background: rgb(185, 240, 185);
+	}
+}
+
+.toggleSlider {
+	position: absolute;
+	background: darkgreen;
+	opacity: 35%;
+	height: 0.25rem;
+	width: 50%;
+	left: 50%;
+	bottom: 0;
+	transition: left 0.4s linear;
+
+	&.toggleSliderCreate {
+		left: 0%;
+	}
+}

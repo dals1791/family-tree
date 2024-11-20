@@ -14,30 +14,18 @@ export const CREATE_FAMILY = gql(`
 			}
 		}
 	}
-`) as DocumentNode 
+`) as DocumentNode
 
-
-// export const ADD_FAMILY_MEMBER = gql(`
-// 	mutation AddFamilyMember(
-// 		$firstName: String!
-// 		$lastName: String!
-// 		$birthDate: Date
-// 		$gender: Gender
-// 		$familyId: ID!
-// 	) {
-// 		createFamilyMember(
-// 			firstName: $firstName
-// 			lastName: $lastName
-// 			birthDate: $birthDate
-// 			gender: $gender
-// 			families: { connect: { where: { id: $familyId } } }
-// 		) {
-// 			id
-// 			firstName
-// 			lastName
-// 		}
-// 	}
-// `)
+export const CREATE_FAMILY_MEMBERS = gql(`
+	mutation CreateFamilyMembers($input: [FamilyMemberCreateInput!]!) {
+		createFamilyMember(input: $input) {
+			id
+			firstName
+			lastName
+		}
+	}
+`) as DocumentNode
 
 // Type assertion using DocumentType
 export type CreateFamilyMutation = DocumentType<typeof CREATE_FAMILY>
+export type CreateFamilyMemberMutation = DocumentType<typeof CREATE_FAMILY_MEMBERS>

@@ -1,5 +1,5 @@
 import { getAllFamilies } from '@/api'
-import { GenericForm } from './shared'
+import { FamilyForm } from './shared'
 
 const FamilyList = async () => {
 	await getAllFamilies()
@@ -7,7 +7,7 @@ const FamilyList = async () => {
 	return (
 		<section>
 			<div>HelloWorld</div>
-			<GenericForm />
+			<FamilyForm />
 		</section>
 	)
 }
