@@ -1,48 +1,55 @@
 'use client'
 import React, { useState, ReactNode } from 'react'
 import classNames from 'classnames'
-import { FormType } from '@/types/form'
+import { useMutation } from '@apollo/client'
+import { CREATE_FAMILY, CreateFamilyMutation } from '@/api/graphql'
 import { CreateFamily, CreateFamilyMember } from './partials'
 import styles from './FamilyForm.module.css'
 
+interface CreateFamilyMutationVariables {
+	input: Array<{
+		name: string
+	}>
+}
+
 const FamilyForm = (): ReactNode => {
-	const [isNewFamily, setIsNewFamily] = useState<boolean>(true)
 	const [familyName, setFamilyName] = useState<string>('')
 	const [formType, setFormType] = useState<string>('CREATE')
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
-	// const renderForm = (): ReactNode => {
-	// 	switch (formType) {
-	// 		case FormType.FAMILY:
-	// 			return <CreateFamily  />
-	// 		case FormType.FAMILY_MEMBER:
-	// 			return <CreateFamilyMember />
-	// 		default:
-	// 			return <CreateFamily />
-	// 	}
-	// }
+	const [createFamily] = useMutation<CreateFamilyMutation, CreateFamilyMutationVariables>(
+		CREATE_FAMILY
+	)
 
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
-		// setLoading(true)
+		setIsLoading(true)
+		try { 
+			if (formType === 'CREATE') {
+				const createFamilyResponse = await createFamily({
+					variables: {
+						input: [
+							{
+								name: familyName
+							}
+						]
+					}
+				})
 
-		// try {
-		// 	const response = await createFamily({
-		// 		variables: {
-		// 			input: [
-		// 				{
-		// 					name: familyName
-		// 				}
-		// 			]
-		// 		}
-		// 	})
+				console.log('CREATE_FAMILY', createFamilyResponse)
+			}
 
-		// 	console.log('RESPONSE_MUTATION', response)
-		// 	setFamilyName('')
-		// } catch (error) {
-		// 	console.log(error)
-		// } finally {
-		// 	// setLoading(false)
-		// }
+			if (formType === 'UPDATE') {
+			}
+		} catch (error) {
+			const errorTitle = formType === 'CREATE' ? 'ERROR CREATING FAMILY' : 'ERROR UPDATING FAMILY'
+			console.error(errorTitle, error)
+		} finally {
+			setIsLoading(false)
+			if (formType === 'CREATE') {
+				setFamilyName('')
+			}
+		}
 	}
 
 	const toggleClasses = classNames(styles.toggleSlider, {
@@ -69,7 +76,8 @@ const FamilyForm = (): ReactNode => {
 					<div className={toggleClasses} />
 				</div>
 			</div>
-			<div>
+			{isLoading && <h4>...isLoading</h4>}
+			<div className={styles.familyNameInput}>
 				<label htmlFor="familyName">Family Name</label>
 				<input
 					type="text"
@@ -81,15 +89,17 @@ const FamilyForm = (): ReactNode => {
 					required
 				/>
 			</div>
-			<div>
+			<div className={styles.familyMetaData}>
 				{/* If new family have create fields to create and connect the memebrs to the family */}
 				{/* IF update family, have family member search field. display relations, spouse, parents, children for single memeber. */}
-				<div>
+				<div className={styles.familyMember}>
 					<div>name</div>
 					<div>+</div>
 				</div>
 			</div>
-			<button>{isNewFamily ? 'create' : 'search'}</button>
+			<button type="button" onClick={handleSubmit}>
+				{formType === 'CREATE' ? 'Create Family' : 'UPDATE'}
+			</button>
 		</div>
 	)
 }
