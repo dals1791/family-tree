@@ -12,8 +12,17 @@ interface CreateFamilyMutationVariables {
 	}>
 }
 
+
+interface FamilyMember {
+	firstName: string
+	lastName: string
+	relation: string
+}
+
 const FamilyForm = (): ReactNode => {
 	const [familyName, setFamilyName] = useState<string>('')
+	const [familyMembers, setFamilyMembers] = useState<FamilyMember[]>([])
+	const [familyMemberCount, setFamilyMemberCount] = useState(1)
 	const [formType, setFormType] = useState<string>('CREATE')
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -92,10 +101,12 @@ const FamilyForm = (): ReactNode => {
 			<div className={styles.familyMetaData}>
 				{/* If new family have create fields to create and connect the memebrs to the family */}
 				{/* IF update family, have family member search field. display relations, spouse, parents, children for single memeber. */}
-				<div className={styles.familyMember}>
-					<div>name</div>
-					<div>+</div>
-				</div>
+				<button type='button' onClick={() => setFamilyMemberCount((prev) => prev + 1)}>+</button>
+				{Array.from({length: familyMemberCount}).map((_, i) => (
+					<CreateFamilyMember key={i} formCount={i} setFamilyMembers={setFamilyMembers} />
+				))
+					
+				}
 			</div>
 			<button type="button" onClick={handleSubmit}>
 				{formType === 'CREATE' ? 'Create Family' : 'UPDATE'}
