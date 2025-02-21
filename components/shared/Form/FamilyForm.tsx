@@ -1,9 +1,8 @@
 'use client'
-import React, { useState, ReactNode } from 'react'
-import classNames from 'classnames'
+import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client'
 import { CREATE_FAMILY, CreateFamilyMutation } from '@/api/graphql'
-import { CreateFamily, CreateFamilyMember } from './partials'
 import styles from './FamilyForm.module.css'
 
 interface CreateFamilyMutationVariables {
@@ -12,19 +11,10 @@ interface CreateFamilyMutationVariables {
 	}>
 }
 
-
-interface FamilyMember {
-	firstName: string
-	lastName: string
-	relation: string
-}
-
-const FamilyForm = (): ReactNode => {
-	const [familyName, setFamilyName] = useState<string>('')
-	const [familyMembers, setFamilyMembers] = useState<FamilyMember[]>([])
-	const [familyMemberCount, setFamilyMemberCount] = useState(1)
-	const [formType, setFormType] = useState<string>('CREATE')
-	const [isLoading, setIsLoading] = useState<boolean>(false)
+const FamilyForm = () => {
+	const router = useRouter()
+	const [familyName, setFamilyName] = useState('')
+	const [isLoading, setIsLoading] = useState(false)
 
 	const [createFamily] = useMutation<CreateFamilyMutation, CreateFamilyMutationVariables>(
 		CREATE_FAMILY
@@ -33,57 +23,35 @@ const FamilyForm = (): ReactNode => {
 	const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
 		setIsLoading(true)
-		try { 
-			if (formType === 'CREATE') {
-				const createFamilyResponse = await createFamily({
-					variables: {
-						input: [
-							{
-								name: familyName
-							}
-						]
-					}
-				})
+		try {
+			const createFamilyResponse = await createFamily({
+				variables: {
+					input: [
+						{
+							name: familyName
+						}
+					]
+				}
+			})
 
-				console.log('CREATE_FAMILY', createFamilyResponse)
-			}
-
-			if (formType === 'UPDATE') {
+			console.log('CREATE_FAMILY', createFamilyResponse)
+			const newFamilyId = createFamilyResponse?.data?.createFamilies?.families[0]?.id
+			if (newFamilyId) {
+				router.push(`/family/${newFamilyId}`)
 			}
 		} catch (error) {
-			const errorTitle = formType === 'CREATE' ? 'ERROR CREATING FAMILY' : 'ERROR UPDATING FAMILY'
+			const errorTitle = 'ERROR CREATING FAMILY'
 			console.error(errorTitle, error)
 		} finally {
 			setIsLoading(false)
-			if (formType === 'CREATE') {
-				setFamilyName('')
-			}
+			setFamilyName('')
 		}
 	}
-
-	const toggleClasses = classNames(styles.toggleSlider, {
-		[styles.toggleSliderCreate]: formType === 'CREATE'
-	})
-	const toggleCreateClasses = classNames(styles.toggleButton, styles.toggleButton__create, {
-		[styles.isSelected]: formType === 'CREATE'
-	})
-	const toggleUpdateClasses = classNames(styles.toggleButton, styles.toggleButton__update, {
-		[styles.isSelected]: formType === 'UPDATE'
-	})
 
 	return (
 		<div className={styles.familyManagementContainer}>
 			<div>
 				<h2>Family Management</h2>
-				<div className={styles.formToggleContainer}>
-					<button className={toggleCreateClasses} onClick={() => setFormType('CREATE')}>
-						Create
-					</button>
-					<button className={toggleUpdateClasses} onClick={() => setFormType('UPDATE')}>
-						Update
-					</button>
-					<div className={toggleClasses} />
-				</div>
 			</div>
 			{isLoading && <h4>...isLoading</h4>}
 			<div className={styles.familyNameInput}>
@@ -97,20 +65,10 @@ const FamilyForm = (): ReactNode => {
 					}}
 					required
 				/>
+				<button type="button" onClick={handleSubmit}>
+					Create Family
+				</button>
 			</div>
-			<div className={styles.familyMetaData}>
-				{/* If new family have create fields to create and connect the memebrs to the family */}
-				{/* IF update family, have family member search field. display relations, spouse, parents, children for single memeber. */}
-				<button type='button' onClick={() => setFamilyMemberCount((prev) => prev + 1)}>+</button>
-				{Array.from({length: familyMemberCount}).map((_, i) => (
-					<CreateFamilyMember key={i} formCount={i} setFamilyMembers={setFamilyMembers} />
-				))
-					
-				}
-			</div>
-			<button type="button" onClick={handleSubmit}>
-				{formType === 'CREATE' ? 'Create Family' : 'UPDATE'}
-			</button>
 		</div>
 	)
 }

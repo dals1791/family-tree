@@ -18,7 +18,7 @@ export const CREATE_FAMILY = gql(`
 
 export const CREATE_FAMILY_MEMBERS = gql(`
 	mutation CreateFamilyMembers($input: [FamilyMemberCreateInput!]!) {
-		createFamilyMember(input: $input) {
+		createFamilyMembers(input: $input) {
 			id
 			firstName
 			lastName

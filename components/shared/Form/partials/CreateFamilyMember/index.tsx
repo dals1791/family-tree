@@ -86,7 +86,7 @@ const CreateFamilyMember: React.FC<CreateFamilyMemberProps> = ({ setFamilyMember
 				))}
 			</div>
 
-			<button type="button" onClick={handleAddFamilyMember}>
+			<button className={styles.addFamilyMemberButton} type="button" onClick={handleAddFamilyMember}>
 				+
 			</button>
 		</div>
