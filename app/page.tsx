@@ -1,10 +1,15 @@
-// import styles from './page.module.css'
-import FamilyList from '@/components/FamilyList'
 import { Suspense } from 'react'
+import { Family } from '@/types/__generated__/graphql'
+import FamilySummaryCard from '@/components/FamilySummaryCard'
+import { getAllFamilies } from '@/api'
+import { encodeId } from '@/utils/slugs'
+import styles from './page.module.css'
 
-export default function Home() {
+export default async function Home() {
+	const families = await getAllFamilies()
+
 	return (
-		<main>
+		<main className={styles.main}>
 			<Suspense
 				fallback={
 					<div role="status" className="flex justify-center items-center p-4">
@@ -12,7 +17,12 @@ export default function Home() {
 					</div>
 				}
 			>
-				<FamilyList />
+				<section className={styles.familiesSection}>
+					{families?.map((family: Family) => {
+						const encodedId = encodeId(family.id)
+						return <FamilySummaryCard key={encodedId} {...family} id={encodedId}/>
+					})}
+				</section>
 			</Suspense>
 		</main>
 	)

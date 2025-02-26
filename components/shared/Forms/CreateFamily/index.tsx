@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client'
 import { CREATE_FAMILY } from '@/api/graphql'
 import { CreateFamilyMutation } from '@/types/__generated__/graphql'
@@ -13,7 +13,7 @@ interface CreateFamilyMutationVariables {
 }
 
 const CreateFamilyForm = () => {
-	const router = useRouter()
+	// const router = useRouter()
 	const [familyName, setFamilyName] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -37,9 +37,7 @@ const CreateFamilyForm = () => {
 
 			console.log('CREATE_FAMILY', createFamilyResponse)
 			const newFamilyId = createFamilyResponse?.data?.createFamilies?.families[0]?.id
-			if (newFamilyId) {
-				router.push(`/family/${newFamilyId}`)
-			}
+			console.log(newFamilyId)
 		} catch (error) {
 			const errorTitle = 'ERROR CREATING FAMILY'
 			console.error(errorTitle, error)

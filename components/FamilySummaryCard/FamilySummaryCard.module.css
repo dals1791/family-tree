@@ -1,0 +1,21 @@
+.familyCardContainer {
+	display: grid;
+	justify-content: center;
+	align-items: start;
+	justify-items: center;
+	border: 1px solid black;
+	margin: 0.5rem 0.25rem;
+	width: 150px;
+	height: 200px;
+    padding: 1rem;
+}
+
+.familyMembersContainer {
+	display: flex;
+	flex-direction: column;
+
+	& li {
+		margin-bottom: 0.25rem;
+		list-style: none;
+	}
+}

@@ -5,7 +5,7 @@ const FamilyList = async () => {
 
 	return (
 		<section>
-			<div>HelloWorld</div>
+			
 		</section>
 	)
 }
