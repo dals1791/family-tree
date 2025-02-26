@@ -1,19 +1,9 @@
-// import { Family } from '@/types/family'
-import { Family } from '../types/__generated__/graphql'
+import { Family, QueryFamiliesArgs } from '../types/__generated__/graphql'
 import { GET_ALL_FAMILIES, GET_FAMILY } from './graphql'
 import { query } from '@/api/ApolloClient'
 
 interface GetFamiliesData {
 	families: Family[]
-}
-
-type GetFamilyData = {
-	families: Family[]
-}
-type GetFamilyVars = {
-	where: {
-		id: string
-	}
 }
 
 export const getAllFamilies = async () => {
@@ -23,7 +13,7 @@ export const getAllFamilies = async () => {
 
 export const getFamily = async (familyId: string) => {
 	try {
-		const { data } = await query<GetFamilyData, GetFamilyVars>({
+		const { data } = await query<GetFamiliesData, QueryFamiliesArgs>({
 			query: GET_FAMILY,
 			variables: {
 				where: {
@@ -31,6 +21,7 @@ export const getFamily = async (familyId: string) => {
 				}
 			}
 		})
+	
 		return data?.families?.[0]
 	} catch (err) {
 		console.error(err)

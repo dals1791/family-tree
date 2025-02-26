@@ -1,8 +1,7 @@
-// import { gql, DocumentType } from '@/types/__generated__'
-import { gql } from '@apollo/client'
-// import { DocumentNode } from '@apollo/client'
+import { gql as generatedGql } from '@/types/__generated__'
+import { gql as apolloGql } from '@apollo/client'
 
-export const GET_ALL_FAMILIES = gql(`
+export const GET_ALL_FAMILIES = generatedGql(`
 	query GetAllFamilies {
 		families {
 			id
@@ -16,7 +15,7 @@ export const GET_ALL_FAMILIES = gql(`
 	}
 `)
 
-export const GET_FAMILY = gql`
+export const GET_FAMILY = apolloGql`
 	query GetFamily($where: FamilyWhere) {
 		families(where: $where) {
 			id
@@ -29,6 +28,3 @@ export const GET_FAMILY = gql`
 		}
 	}
 `
-
-// Export the type for use in other files
-// export type GetFamilyQuery = DocumentType<typeof GET_FAMILY>

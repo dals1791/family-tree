@@ -8,7 +8,7 @@ type FamilyProps = {
 }
 
 export default async function Page({ params }: FamilyProps) {
-    const { id } = params
+    const { id } = await params
 	return (
 		<main className="familyDetail_Page">
 			Family Detail Page
