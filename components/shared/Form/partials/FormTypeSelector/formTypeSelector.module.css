@@ -1,8 +1,0 @@
-.formTypeSelectorContainer {
-	display: flex;
-}
-
-.isSelected {
-	border: 1px solid;
-	font-weight: bold;
-}

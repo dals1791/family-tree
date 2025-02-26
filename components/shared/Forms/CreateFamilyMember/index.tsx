@@ -1,5 +1,5 @@
 import React, { useState, Dispatch, SetStateAction } from 'react'
-import styles from '../../FamilyForm.module.css'
+import styles from './CreateFamilyMemberForm.module.css'
 
 interface RadioOption {
 	value: string
@@ -23,7 +23,10 @@ const initialFamilyMember: FamilyMember = {
 	relation: ''
 }
 
-const CreateFamilyMember: React.FC<CreateFamilyMemberProps> = ({ setFamilyMembers, formCount }) => {
+const CreateFamilyMemberForm: React.FC<CreateFamilyMemberProps> = ({
+	setFamilyMembers,
+	formCount
+}) => {
 	const [familyMemberData, setFamilyMemberData] = useState<FamilyMember>(initialFamilyMember)
 
 	const radioOptions: RadioOption[] = [
@@ -86,11 +89,15 @@ const CreateFamilyMember: React.FC<CreateFamilyMemberProps> = ({ setFamilyMember
 				))}
 			</div>
 
-			<button className={styles.addFamilyMemberButton} type="button" onClick={handleAddFamilyMember}>
+			<button
+				className={styles.addFamilyMemberButton}
+				type="button"
+				onClick={handleAddFamilyMember}
+			>
 				+
 			</button>
 		</div>
 	)
 }
 
-export { CreateFamilyMember }
+export { CreateFamilyMemberForm }

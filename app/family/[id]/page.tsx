@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import FamilyDetailPage from '@/components/FamilyDetailPage'
+import FamilyDetailPage from '@/app/family/[id]/FamilyDetailPage'
 
 type FamilyProps = {
 	params: {

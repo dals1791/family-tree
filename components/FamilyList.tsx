@@ -1,5 +1,4 @@
 import { getAllFamilies } from '@/api'
-import { FamilyForm } from './shared'
 
 const FamilyList = async () => {
 	await getAllFamilies()
@@ -7,7 +6,6 @@ const FamilyList = async () => {
 	return (
 		<section>
 			<div>HelloWorld</div>
-			<FamilyForm />
 		</section>
 	)
 }

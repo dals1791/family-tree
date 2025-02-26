@@ -1,4 +1,4 @@
-import { gql, DocumentType } from '@/types/__generated__'
+import { gql } from '@/types/__generated__'
 import { DocumentNode } from '@apollo/client'
 
 export const CREATE_FAMILY = gql(`
@@ -25,7 +25,3 @@ export const CREATE_FAMILY_MEMBERS = gql(`
 		}
 	}
 `) as DocumentNode
-
-// Type assertion using DocumentType
-export type CreateFamilyMutation = DocumentType<typeof CREATE_FAMILY>
-export type CreateFamilyMemberMutation = DocumentType<typeof CREATE_FAMILY_MEMBERS>
