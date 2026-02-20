@@ -1,13 +1,9 @@
-import { getAllFamilies } from '@/api'
+import { getAllFamilies } from '@/services'
 
 const FamilyList = async () => {
 	await getAllFamilies()
 
-	return (
-		<section>
-			
-		</section>
-	)
+	return <section></section>
 }
 
 export default FamilyList

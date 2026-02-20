@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 // import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client'
-import { CREATE_FAMILY } from '@/api/graphql'
+import { CREATE_FAMILY } from '@/graphql'
 import { CreateFamilyMutation } from '@/types/__generated__/graphql'
 import styles from './FamilyForm.module.css'
 

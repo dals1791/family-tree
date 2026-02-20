@@ -1,8 +1,7 @@
 import { Suspense } from 'react'
 import { Family } from '@/types/__generated__/graphql'
 import FamilySummaryCard from '@/components/FamilySummaryCard'
-import { getAllFamilies } from '@/api'
-import { encodeId } from '@/utils/slugs'
+import { getAllFamilies } from '@/services'
 import styles from './page.module.css'
 
 export default async function Home() {
@@ -19,8 +18,7 @@ export default async function Home() {
 			>
 				<section className={styles.familiesSection}>
 					{families?.map((family: Family) => {
-						const encodedId = encodeId(family.id)
-						return <FamilySummaryCard key={encodedId} {...family} id={encodedId}/>
+						return <FamilySummaryCard key={family.id} {...family} id={family.id} />
 					})}
 				</section>
 			</Suspense>

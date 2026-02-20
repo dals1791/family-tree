@@ -1,6 +1,6 @@
 import { Family, QueryFamiliesArgs } from '../types/__generated__/graphql'
-import { GET_ALL_FAMILIES, GET_FAMILY } from './graphql'
-import { query } from '@/api/ApolloClient'
+import { GET_ALL_FAMILIES, GET_FAMILY } from '../graphql'
+import { query } from '@/lib/apollo/ApolloClient'
 
 interface GetFamiliesData {
 	families: Family[]
@@ -21,7 +21,7 @@ export const getFamily = async (familyId: string) => {
 				}
 			}
 		})
-	
+
 		return data?.families?.[0]
 	} catch (err) {
 		console.error(err)

@@ -1,4 +1,4 @@
-import { getFamily } from '@/api'
+import { getFamily } from '@/services'
 import { decodeId } from '@/utils/slugs'
 // import styles from './familyDetailPage.css'
 

@@ -1,4 +1,4 @@
-import { ApolloWrapper } from '@/api/ApolloWrapper'
+import { ApolloWrapper } from '@/lib/apollo/ApolloWrapper'
 import './globals.css'
 
 export default function RootLayout({
