@@ -1,5 +1,4 @@
 import { getFamily } from '@/services'
-import { decodeId } from '@/utils/slugs'
 // import styles from './familyDetailPage.css'
 
 type familyDetailPageProps = {
@@ -7,9 +6,8 @@ type familyDetailPageProps = {
 }
 
 const FamilyDetailPage = async ({ familyId }: familyDetailPageProps) => {
-	const decodedId = decodeId(familyId)
-	const family = await getFamily(decodedId)
-	console.log(family, decodedId)
+	const family = await getFamily(familyId)
+	console.log(family, familyId)
 	// const [familyMemberCount]
 	// return (
 	//     <div className={styles.familyMetaData}>
