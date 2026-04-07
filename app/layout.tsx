@@ -1,18 +1,9 @@
-import { ApolloWrapper } from '@/lib/apollo/ApolloWrapper'
 import './globals.css'
 
-export default function RootLayout({
-	children
-}: Readonly<{
-	children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body>
-				{/* Ensure provider doesn't break HTML structure */}
-				<ApolloWrapper>{children}</ApolloWrapper>
-				{/* {children} */}
-			</body>
+			<body>{children}</body>
 		</html>
 	)
 }
