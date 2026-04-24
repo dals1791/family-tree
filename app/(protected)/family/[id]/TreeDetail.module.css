@@ -1,0 +1,248 @@
+/* ── Page layout ──────────────────────────────────────────────────────────── */
+
+.layout {
+  display: flex;
+  height: calc(100vh - 60px); /* subtract nav height */
+  overflow: hidden;
+}
+
+/* ── Graph area ───────────────────────────────────────────────────────────── */
+
+.graphArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.graphHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.treeName {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.graphActions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.graphCanvas {
+  flex: 1;
+  position: relative;
+}
+
+.graphLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* ── Detail panel ─────────────────────────────────────────────────────────── */
+
+.detailPanel {
+  width: 260px;
+  flex-shrink: 0;
+  border-left: 1px solid #e5e7eb;
+  padding: 1.25rem;
+  overflow-y: auto;
+  background: #fafafa;
+}
+
+.detailName {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+
+.detailYears {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0 0 0.2rem;
+}
+
+.detailMeta {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 0.75rem 0;
+}
+
+.relGroup {
+  margin-bottom: 0.75rem;
+}
+
+.relGroupLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.relEntry {
+  font-size: 0.875rem;
+  color: #374151;
+  padding: 0.2rem 0;
+}
+
+.relType {
+  color: #9ca3af;
+  font-size: 0.8rem;
+}
+
+.noRels {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  font-style: italic;
+  margin: 0;
+}
+
+/* ── Forms ────────────────────────────────────────────────────────────────── */
+
+.addButton {
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.addButton:hover {
+  background: #1e40af;
+}
+
+.form {
+  position: absolute;
+  top: 60px;
+  right: 270px;
+  z-index: 10;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 320px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.formTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.formRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input,
+.select {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  outline: none;
+  background: white;
+  min-width: 0;
+}
+
+.input:focus,
+.select:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.15);
+}
+
+.formActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.submitButton {
+  padding: 0.5rem 1.25rem;
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  color: #374151;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* ── Mode toggle (Add Relationship form) ──────────────────────────────────── */
+
+.modeToggle {
+  display: flex;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.modeButton {
+  flex: 1;
+  padding: 0.4rem 0;
+  border: none;
+  background: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #374151;
+}
+
+.modeButtonActive {
+  background: #1d4ed8;
+  color: white;
+}
